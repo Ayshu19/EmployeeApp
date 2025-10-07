@@ -1,23 +1,28 @@
-﻿h2 {
+﻿/* General heading */
+h2 {
     text-align: center;
 }
 
+/* Form styling */
 form {
     margin: 20px auto;
     width: 400px;
 }
 
+/* Labels */
 label {
     font-weight: bold;
 }
 
-input, textarea {
+/* Inputs, textarea, and select */
+input, textarea, select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
     box-sizing: border-box;
 }
 
+/* Submit button */
 button {
     background-color: #28a745;
     color: white;
@@ -31,6 +36,7 @@ button {
         background-color: #218838;
     }
 
+/* PDF Download link */
 a#downloadLink {
     display: inline-block;
     text-align: center;
@@ -45,3 +51,35 @@ a#downloadLink {
     a#downloadLink:hover {
         background-color: #0056b3;
     }
+
+/* Attendance button */
+a.btn-attendance {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+    a.btn-attendance:hover {
+        background-color: #005fa3;
+    }
+
+/* Messages below forms */
+#formMessage {
+    text-align: center;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Attendance page specific */
+input[type="date"] {
+    cursor: pointer;
+}
+
+p {
+    font-size: 14px;
+}

@@ -1,0 +1,46 @@
+﻿@model EmployeeApp.Models.AttendanceModel
+
+<head>
+    <link rel="stylesheet" href="~/css/Employee.css" />
+</head>
+
+<h2>Employee Attendance</h2>
+
+<form asp-action="SubmitLeave" method="post" id="attendanceForm">
+    <div>
+        <label>Enter Employee ID:</label><br />
+        <input type="number" id="employeeId" name="employeeId" required />
+    </div>
+    <br />
+    <div>
+        <label>Select Date:</label><br />
+        <input type="date" id="leaveDate" name="date" required />
+    </div>
+    <br />
+    <div>
+        <label>Leave Type:</label><br />
+        <select id="leaveType" name="leaveType" required>
+            <option value="">-- Select Leave Type --</option>
+            <option value="Casual">Casual Leave</option>
+            <option value="Sick">Sick Leave</option>
+        </select>
+    </div>
+    <br />
+    <!-- Remaining leaves message -->
+    <div id="remainingLeaves" style="color: blue; font-weight: bold;"></div>
+    <br />
+    <button type="submit">Submit Leave</button>
+</form>
+
+<!-- Final message after submission -->
+@if (ViewBag.Message != null)
+{
+    <p style="color: green; font-weight: bold;">@ViewBag.Message</p>
+}
+
+@if (ViewBag.LeavesLeft != null)
+{
+    <p style="color: blue; font-weight: bold;">@ViewBag.LeavesLeft</p>
+}
+
+<script src="~/js/Attendance.js"></script>

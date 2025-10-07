@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 // Register the EmployeeRepository for dependency injection
 builder.Services.AddScoped<EmployeeRepository>();
 
-// (Optional) Enable session support – only if you plan to use sessions later
+// Optional session support for future use
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -20,7 +20,11 @@ builder.Services.AddSession(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage(); // Better error info during development
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
@@ -31,12 +35,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Use session (optional – safe to keep in for future use)
+// Use session (optional)
 app.UseSession();
 
 app.UseAuthorization();
 
-// Default route: EmployeeController -> Index action
+// Default route: EmployeeController -> Create action
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Employee}/{action=Create}/{id?}");

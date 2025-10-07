@@ -6,6 +6,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace EmployeeApp.Controllers
 {
@@ -18,12 +19,14 @@ namespace EmployeeApp.Controllers
             _repo = repo;
         }
 
+        // GET: /Employee/Create
         [HttpGet]
         public IActionResult Create()
         {
             return View(new EmployeeModel());
         }
 
+        // POST: /Employee/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EmployeeModel employee)
@@ -36,11 +39,11 @@ namespace EmployeeApp.Controllers
 
             QuestPDF.Settings.License = LicenseType.Community;
 
-            // ✅ Optional safety check for DateOfBirth
+            // Optional safety check for DateOfBirth
             if (employee.DateOfBirth.HasValue && employee.DateOfBirth.Value < new DateTime(1753, 1, 1))
                 employee.DateOfBirth = null;
 
-            // Save to DB
+            // Save employee to DB
             await _repo.AddEmployeeAsync(employee);
 
             // Generate PDF
@@ -53,6 +56,7 @@ namespace EmployeeApp.Controllers
             return View(new EmployeeModel());
         }
 
+        // Private method to generate PDF using QuestPDF
         private byte[] GenerateEmployeePdf(EmployeeModel employee)
         {
             var document = Document.Create(container =>
